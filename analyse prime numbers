@@ -1,0 +1,47 @@
+# PrimeNumber
+# this is an algorithme to help you test if a number is prime or not
+#include<iostream>
+#include <string>
+#include <cmath>
+#include <vector>
+
+using namespace std;
+vector<int> premier;
+int input;
+int test = 0;
+int findOut(int input1) {
+    if (input1 > 2)
+        findOut(input1 - 1);
+    int test1 = 0;
+    for (int i = 0; i < premier.size(); i++) {
+        if (premier[i] != 0 && premier[i] > sqrt(input1))
+            break;
+        if (input1 % premier[i] == 0){
+            test1 = 1;
+            break; 
+        }
+    }
+    if (test1 == 0 && input1 >= 2) {
+        if (input % input1 == 0) {
+            test += 1;
+            if (test == 1) {
+                cout << "not primary \n";
+                cout << "to see how many prime number divise this number";
+                system("pause");
+            }
+        }
+        premier.push_back(input1);
+    }
+    return test;
+}
+int main() {
+    cin >> input;
+    if (input <= 1) {
+        cout << "not primary";
+        return 0;
+    }
+    if (findOut(sqrt(input)) == 0)
+        cout << "primary";
+    else
+        cout << "it has " << test << " divisors of prime number";
+}
