@@ -1,0 +1,110 @@
+#include <iostream>
+#include<stdio.h>
+#include <string.h>
+#include<math.h>
+using namespace std;
+
+// algorithm 1
+void sorte1(int a[],int n){
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            if(a[i]>a[j]){
+                int temp = a[i];
+                a[i]=a[j+1];
+                a[j+1]=temp;
+            }
+        }
+    }
+}
+
+// algorithm 1 using reference variable
+void sorte1r(int a[],int n){
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;j++){
+            int &a1 = a[i], &a2 = a[j];
+            if(a[i]<a[j]){
+                int temp = a1;
+                a1 = a2;
+                a2 = temp;
+            }
+        }
+    }
+}
+
+// algorithm 2
+void sorte2(int a[],int n){
+     for(int i=0;i<n;i++){
+        int maxe = a[i];
+        int imax = i;
+        for(int j=i+1;j<n;j++){
+            if(maxe<a[j]){
+                maxe = a[j];
+                imax = j;
+            }
+        }
+        int temp = a[i];
+        a[i] = maxe;
+        a[imax] = temp;
+    }
+}
+
+// algorithm 2 using pointers
+void sorte2p(int* a,int n){
+ int i = 0;
+ while(i<n){
+    int maxe = *a;
+    int imax = 0;
+    for(int j=1;j<n-i;j++){
+        if(maxe<*(a+j)){
+            int s = *(a+j);
+            maxe = *(a+j);
+            imax = j;
+        }
+    }
+    int temp = *a;
+    *a = *(a+imax);
+    *(a+imax) = temp;
+    a+=1;
+    i++;
+}
+}
+
+// algorithm 3
+void sorte3(int a[],int n){
+    bool sorted = false;
+    while(!sorted){
+        sorted = true;
+        for(int j = 0;j<n-1;j++){
+            if(a[j]>a[j+1]){
+                int temp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = temp;
+                sorted = false;
+            }
+        }
+    n--;
+    }
+}
+
+int main(){
+    int a[10000];
+    for(int i =0;i<10000;i++){
+        a[i]=rand() % 10000;
+    }
+
+    //sorte1(a,10000);
+
+    //sorte1r(a,10000);
+
+    //sorte2(a,10000);
+
+    //sorte2p(a,10000);
+
+    //sorte3(a,10000);
+    
+    for(int i =0;i<10000;i++){
+        cout << a[i] << endl;
+    }
+
+
+}
